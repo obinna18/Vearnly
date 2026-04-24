@@ -1,0 +1,1735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vearnly | Learn. Earn. Grow.</title>
+<meta name="description" content="Nigeria's premium knowledge platform. 40 proven income streams, 200+ lessons. Built for Nigerians ready to build serious online income.">
+<meta name="keywords" content="Vearnly, online income Nigeria, digital education Nigeria, make money online Nigeria, 6-figure digital playbook">
+<meta property="og:title" content="Vearnly | Learn. Earn. Grow.">
+<meta property="og:description" content="The platform built to make Nigerians wealthy through knowledge.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,700&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   VARIABLES
+   ============================================================ */
+:root {
+  --gold: #F59E0B;
+  --gold-light: #FCD34D;
+  --gold-dark: #D97706;
+  --gold-pale: #FEF3C7;
+  --gold-mid: rgba(245,158,11,0.12);
+  --black: #0A0A0A;
+  --ink: #1C1917;
+  --ink-mid: #44403C;
+  --ink-light: #78716C;
+  --ivory: #FAF8F3;
+  --ivory-2: #F5F1E8;
+  --white: #FFFFFF;
+  --border: rgba(0,0,0,0.08);
+  --shadow-sm: 0 2px 12px rgba(0,0,0,0.06);
+  --shadow-md: 0 8px 32px rgba(0,0,0,0.10);
+  --shadow-lg: 0 24px 64px rgba(0,0,0,0.12);
+  --shadow-gold: 0 8px 32px rgba(245,158,11,0.25);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --font-head: 'Fraunces', Georgia, serif;
+  --font-body: 'DM Sans', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: var(--font-body);
+  background: var(--ivory);
+  color: var(--ink);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--ivory); }
+::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 4px; }
+::selection { background: var(--gold); color: var(--black); }
+
+/* ============================================================
+   LOADER
+   ============================================================ */
+#loader {
+  position: fixed; inset: 0;
+  background: var(--black);
+  z-index: 9999;
+  display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 24px;
+  transition: opacity 0.8s var(--ease-out), visibility 0.8s;
+}
+#loader.out { opacity: 0; visibility: hidden; pointer-events: none; }
+.loader-logo-img {
+  width: 100px; height: auto;
+  animation: loader-pop 0.6s var(--ease-out) 0.2s both;
+}
+@keyframes loader-pop { from{opacity:0;transform:scale(0.7)} to{opacity:1;transform:scale(1)} }
+.loader-text {
+  font-family: var(--font-head);
+  font-size: 1.8rem; font-weight: 900;
+  color: var(--gold);
+  letter-spacing: 0.25em;
+  animation: loader-pop 0.6s var(--ease-out) 0.5s both;
+}
+.loader-line {
+  width: 160px; height: 2px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 2px; overflow: hidden;
+  animation: loader-pop 0.4s ease 0.7s both;
+}
+.loader-line::after {
+  content: '';
+  display: block; width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  animation: sweep 1s ease-in-out infinite;
+  transform: translateX(-100%);
+}
+@keyframes sweep { to { transform: translateX(100%); } }
+
+/* ============================================================
+   CURSOR
+   ============================================================ */
+.cursor {
+  position: fixed; width: 10px; height: 10px;
+  background: var(--gold);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s, width 0.3s, height 0.3s, opacity 0.3s;
+  mix-blend-mode: multiply;
+}
+.cursor-ring {
+  position: fixed; width: 36px; height: 36px;
+  border: 1.5px solid rgba(245,158,11,0.5);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9997;
+  transform: translate(-50%, -50%);
+  transition: transform 0.18s var(--ease-out), width 0.3s, height 0.3s, opacity 0.3s;
+}
+@media (hover: none) { .cursor, .cursor-ring { display: none; } }
+
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
+nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 1000;
+  height: 72px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 clamp(20px, 5vw, 72px);
+  transition: background 0.4s, box-shadow 0.4s;
+}
+nav.scrolled {
+  background: rgba(250,248,243,0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 1px 0 rgba(0,0,0,0.06);
+}
+.nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.nav-logo-img { height: 36px; width: auto; }
+.nav-logo-text {
+  font-family: var(--font-head); font-weight: 900;
+  font-size: 1.35rem; letter-spacing: 0.14em;
+  color: var(--black); text-transform: uppercase;
+}
+.nav-links { display: flex; list-style: none; gap: 36px; align-items: center; }
+.nav-links a {
+  font-family: var(--font-body); font-size: 0.9rem; font-weight: 500;
+  color: var(--ink-mid); text-decoration: none;
+  transition: color 0.2s;
+  position: relative;
+}
+.nav-links a::after {
+  content: ''; position: absolute; bottom: -3px; left: 0;
+  width: 0; height: 1.5px; background: var(--gold);
+  transition: width 0.3s var(--ease-out);
+}
+.nav-links a:hover { color: var(--black); }
+.nav-links a:hover::after { width: 100%; }
+.nav-btn {
+  background: var(--gold); color: var(--black) !important;
+  padding: 10px 24px; border-radius: 6px;
+  font-weight: 600 !important; font-size: 0.88rem !important;
+  transition: background 0.2s, box-shadow 0.2s, transform 0.2s !important;
+}
+.nav-btn::after { display: none !important; }
+.nav-btn:hover { background: var(--gold-dark) !important; box-shadow: var(--shadow-gold) !important; transform: translateY(-1px) !important; }
+.hamburger {
+  display: none; flex-direction: column; gap: 5px;
+  cursor: pointer; background: none; border: none; padding: 8px;
+}
+.hamburger span { display: block; width: 22px; height: 2px; background: var(--black); border-radius: 2px; transition: all 0.3s; }
+.hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); }
+.mobile-menu {
+  position: fixed; top: 72px; left: 0; right: 0; bottom: 0;
+  background: var(--white); z-index: 999;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 36px;
+  transform: translateY(-110%); opacity: 0;
+  transition: transform 0.45s var(--ease-out), opacity 0.45s;
+  pointer-events: none;
+}
+.mobile-menu.open { transform: translateY(0); opacity: 1; pointer-events: all; }
+.mobile-menu a {
+  font-family: var(--font-head); font-size: 2rem; font-weight: 700;
+  color: var(--black); text-decoration: none; transition: color 0.2s;
+}
+.mobile-menu a:hover { color: var(--gold); }
+.mobile-menu .mob-cta {
+  background: var(--gold); color: var(--black) !important;
+  padding: 14px 48px; border-radius: 8px;
+  font-family: var(--font-body) !important; font-weight: 700 !important; font-size: 1rem !important;
+}
+@media (max-width: 768px) { .nav-links { display: none; } .hamburger { display: flex; } }
+
+/* ============================================================
+   HERO
+   ============================================================ */
+#hero {
+  min-height: 100vh;
+  background: var(--ivory);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 40px;
+  padding: 120px clamp(20px,5vw,72px) 80px;
+  position: relative;
+  overflow: hidden;
+}
+.hero-bg-orb {
+  position: absolute;
+  border-radius: 50%; pointer-events: none; z-index: 0;
+}
+.hero-orb-1 {
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(245,158,11,0.12) 0%, transparent 70%);
+  top: -100px; right: -100px;
+  animation: orb-drift 8s ease-in-out infinite alternate;
+}
+.hero-orb-2 {
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(245,158,11,0.07) 0%, transparent 70%);
+  bottom: 0; left: -80px;
+  animation: orb-drift 10s ease-in-out infinite alternate-reverse;
+}
+@keyframes orb-drift { from{transform:translate(0,0)} to{transform:translate(20px,30px)} }
+
+.hero-dots {
+  position: absolute; z-index: 0;
+  opacity: 0.25;
+  top: 100px; left: 80px;
+}
+.hero-dots-grid {
+  display: grid; grid-template-columns: repeat(8,1fr); gap: 16px;
+}
+.hero-dots-grid span {
+  width: 4px; height: 4px; background: var(--gold-dark);
+  border-radius: 50%; display: block;
+}
+
+.hero-left {
+  position: relative; z-index: 1;
+  animation: hero-in 0.9s var(--ease-out) 0.8s both;
+}
+@keyframes hero-in { from{opacity:0;transform:translateY(40px)} to{opacity:1;transform:translateY(0)} }
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--gold-pale); border: 1px solid rgba(245,158,11,0.3);
+  color: var(--gold-dark); padding: 6px 14px; border-radius: 100px;
+  font-family: var(--font-mono); font-size: 0.65rem;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  margin-bottom: 24px; font-weight: 500;
+}
+.hero-tag::before { content: ''; width: 6px; height: 6px; background: var(--gold); border-radius: 50%; }
+.hero-h1 {
+  font-family: var(--font-head);
+  font-size: clamp(2.4rem,5.5vw,5rem);
+  font-weight: 900;
+  line-height: 1.06;
+  color: var(--black);
+  margin-bottom: 24px;
+}
+.hero-h1 em { font-style: italic; color: var(--gold); }
+.hero-h1 .underline-gold {
+  position: relative; display: inline-block;
+}
+.hero-h1 .underline-gold::after {
+  content: '';
+  position: absolute; bottom: -4px; left: 0; right: 0;
+  height: 4px; background: var(--gold);
+  border-radius: 2px;
+  transform: scaleX(0); transform-origin: left;
+  animation: line-reveal 0.6s var(--ease-out) 1.6s forwards;
+}
+@keyframes line-reveal { to{transform:scaleX(1)} }
+.hero-sub {
+  font-family: var(--font-body);
+  font-size: clamp(1rem,1.5vw,1.15rem);
+  color: var(--ink-mid);
+  line-height: 1.75;
+  max-width: 480px;
+  margin-bottom: 40px;
+  font-weight: 400;
+}
+.hero-btns { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 56px; }
+.btn-gold {
+  background: var(--gold); color: var(--black);
+  padding: 15px 32px; border-radius: 8px;
+  font-family: var(--font-body); font-weight: 700; font-size: 0.95rem;
+  text-decoration: none; display: inline-block;
+  transition: all 0.3s var(--ease-out);
+  box-shadow: 0 4px 0 var(--gold-dark);
+}
+.btn-gold:hover { transform: translateY(-3px); box-shadow: 0 7px 0 var(--gold-dark), 0 16px 40px rgba(245,158,11,0.3); }
+.btn-outline {
+  background: transparent; color: var(--black);
+  padding: 15px 32px; border-radius: 8px;
+  font-family: var(--font-body); font-weight: 600; font-size: 0.95rem;
+  text-decoration: none; display: inline-block;
+  border: 2px solid rgba(0,0,0,0.15);
+  transition: all 0.3s var(--ease-out);
+}
+.btn-outline:hover { border-color: var(--gold); color: var(--gold-dark); transform: translateY(-2px); }
+.hero-proof {
+  display: flex; gap: 36px; flex-wrap: wrap;
+}
+.proof-item { display: flex; align-items: baseline; gap: 6px; }
+.proof-num {
+  font-family: var(--font-head); font-size: 2rem; font-weight: 900;
+  color: var(--black);
+}
+.proof-label {
+  font-family: var(--font-mono); font-size: 0.65rem;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--ink-light);
+}
+.proof-divider { width: 1px; height: 36px; background: var(--border); }
+
+.hero-right {
+  position: relative; z-index: 1;
+  animation: hero-right-in 0.9s var(--ease-out) 1s both;
+}
+@keyframes hero-right-in { from{opacity:0;transform:translateX(40px)} to{opacity:1;transform:translateX(0)} }
+
+.hero-card-stack { position: relative; }
+
+.hero-main-card {
+  background: var(--white);
+  border-radius: 24px;
+  padding: 32px;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border);
+  position: relative;
+  transform: rotate(1deg);
+  transition: transform 0.6s var(--ease-out);
+}
+.hero-main-card:hover { transform: rotate(0deg); }
+
+.card-brand {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 20px;
+}
+.card-brand-logo { height: 28px; width: auto; }
+.card-brand-name {
+  font-family: var(--font-head); font-weight: 900;
+  font-size: 1rem; letter-spacing: 0.1em; color: var(--black);
+}
+
+.card-title-area { margin-bottom: 20px; }
+.card-edition-tag {
+  font-family: var(--font-mono); font-size: 0.62rem;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--gold-dark); background: var(--gold-pale);
+  padding: 3px 10px; border-radius: 100px;
+  display: inline-block; margin-bottom: 10px;
+}
+.card-product-title {
+  font-family: var(--font-head); font-weight: 900;
+  font-size: 1.5rem; line-height: 1.2; color: var(--black);
+}
+.card-product-title em { font-style: italic; color: var(--gold-dark); }
+
+.card-modules {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 10px; margin-bottom: 20px;
+}
+.card-module {
+  background: var(--ivory); border-radius: 10px;
+  padding: 12px 10px; text-align: center;
+  border: 1px solid rgba(0,0,0,0.05);
+  transition: transform 0.2s;
+}
+.card-module:hover { transform: translateY(-2px); }
+.card-module-num {
+  font-family: var(--font-head); font-size: 1.4rem;
+  font-weight: 900; color: var(--gold-dark); display: block;
+}
+.card-module-label {
+  font-family: var(--font-mono); font-size: 0.58rem;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-light);
+}
+
+.card-cta {
+  display: block; background: var(--black); color: var(--white);
+  text-align: center; padding: 14px; border-radius: 10px;
+  font-family: var(--font-body); font-weight: 700; font-size: 0.9rem;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.2s;
+}
+.card-cta:hover { background: var(--gold); color: var(--black); transform: translateY(-2px); }
+
+/* Floating chips */
+.hero-chip {
+  position: absolute;
+  background: var(--white);
+  border-radius: 100px;
+  padding: 8px 16px;
+  box-shadow: var(--shadow-md);
+  display: flex; align-items: center; gap: 8px;
+  font-family: var(--font-body); font-size: 0.78rem; font-weight: 600;
+  color: var(--black);
+  animation: float 3s ease-in-out infinite;
+  border: 1px solid rgba(0,0,0,0.06);
+}
+.hero-chip-1 { top: -16px; right: -16px; animation-delay: 0s; }
+.hero-chip-2 { bottom: 40px; left: -24px; animation-delay: 1.5s; }
+@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+.chip-dot { width: 8px; height: 8px; background: var(--gold); border-radius: 50%; }
+
+@media (max-width: 900px) {
+  #hero { grid-template-columns: 1fr; padding-top: 100px; }
+  .hero-right { order: -1; }
+  .hero-main-card { transform: rotate(0); }
+  .hero-h1 { font-size: clamp(2rem, 7vw, 3.2rem); }
+}
+
+/* ============================================================
+   MARQUEE STRIP
+   ============================================================ */
+.marquee-strip {
+  background: var(--black);
+  padding: 16px 0;
+  overflow: hidden;
+  position: relative;
+}
+.marquee-track {
+  display: flex; gap: 0; width: max-content;
+  animation: marquee-scroll 22s linear infinite;
+}
+@keyframes marquee-scroll { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+.marquee-item {
+  display: flex; align-items: center; gap: 16px;
+  padding: 0 36px;
+  font-family: var(--font-mono); font-size: 0.75rem;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  white-space: nowrap;
+}
+.marquee-star { color: var(--gold); font-size: 0.7rem; }
+
+/* ============================================================
+   SECTION UTILITIES
+   ============================================================ */
+.section-wrap {
+  padding: clamp(80px,10vw,130px) clamp(20px,5vw,72px);
+}
+.max-w { max-width: 1200px; margin: 0 auto; }
+
+.eyebrow {
+  font-family: var(--font-mono); font-size: 0.68rem;
+  letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--gold-dark); margin-bottom: 14px; display: block;
+}
+.section-h2 {
+  font-family: var(--font-head); font-weight: 900;
+  font-size: clamp(1.8rem,4vw,3.5rem);
+  line-height: 1.1; color: var(--black); margin-bottom: 20px;
+}
+.section-h2 em { font-style: italic; color: var(--gold-dark); }
+.section-p {
+  font-family: var(--font-body); font-size: 1.05rem;
+  color: var(--ink-mid); line-height: 1.75; font-weight: 400;
+}
+.divider { width: 48px; height: 3px; background: var(--gold); border-radius: 2px; margin-bottom: 28px; }
+
+/* Reveal */
+.rv { opacity: 0; transform: translateY(36px); transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out); }
+.rv.in { opacity: 1; transform: translateY(0); }
+.rv-l { opacity: 0; transform: translateX(-36px); transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out); }
+.rv-l.in { opacity: 1; transform: translateX(0); }
+.rv-r { opacity: 0; transform: translateX(36px); transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out); }
+.rv-r.in { opacity: 1; transform: translateX(0); }
+.d1{transition-delay:.1s!important}.d2{transition-delay:.2s!important}
+.d3{transition-delay:.3s!important}.d4{transition-delay:.4s!important}
+.d5{transition-delay:.5s!important}.d6{transition-delay:.6s!important}
+
+/* ============================================================
+   ABOUT
+   ============================================================ */
+#about { background: var(--white); }
+.about-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: clamp(40px,7vw,100px); align-items: center;
+}
+.about-p { margin-bottom: 20px; }
+.about-values {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 14px; margin-top: 36px;
+}
+.value-card {
+  background: var(--ivory); border-radius: 12px;
+  padding: 20px 18px; border: 1px solid rgba(0,0,0,0.06);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.value-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+.value-icon { font-size: 1.6rem; margin-bottom: 10px; }
+.value-title { font-family: var(--font-head); font-weight: 700; font-size: 0.95rem; color: var(--black); margin-bottom: 6px; }
+.value-desc { font-family: var(--font-body); font-size: 0.82rem; color: var(--ink-light); line-height: 1.6; }
+
+.about-visual-wrap { position: relative; }
+.about-big-card {
+  background: var(--black); border-radius: 20px;
+  padding: 40px; color: var(--white);
+  position: relative; overflow: hidden;
+}
+.about-big-card::before {
+  content: '';
+  position: absolute; top: -80px; right: -80px;
+  width: 280px; height: 280px;
+  background: radial-gradient(circle, rgba(245,158,11,0.2) 0%, transparent 70%);
+  border-radius: 50%;
+}
+.about-quote-mark {
+  font-family: var(--font-head); font-size: 6rem;
+  color: var(--gold); opacity: 0.3; line-height: 1;
+  margin-bottom: -20px;
+}
+.about-quote-text {
+  font-family: var(--font-head); font-size: 1.2rem;
+  font-style: italic; line-height: 1.6;
+  color: var(--white); margin-bottom: 28px;
+  position: relative;
+}
+.about-founder {
+  display: flex; align-items: center; gap: 14px;
+  position: relative;
+}
+.founder-ava {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: var(--gold); display: flex; align-items: center;
+  justify-content: center; font-family: var(--font-head);
+  font-weight: 900; font-size: 1.1rem; color: var(--black);
+  flex-shrink: 0;
+}
+.founder-name { font-weight: 600; color: var(--white); font-size: 0.9rem; }
+.founder-role {
+  font-family: var(--font-mono); font-size: 0.6rem;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(255,255,255,0.4); margin-top: 2px;
+}
+.about-stat-row {
+  display: flex; gap: 0; margin-top: 24px;
+  border-top: 1px solid rgba(255,255,255,0.08); padding-top: 24px;
+}
+.about-stat { flex: 1; text-align: center; }
+.about-stat + .about-stat { border-left: 1px solid rgba(255,255,255,0.08); }
+.about-stat-num {
+  font-family: var(--font-head); font-size: 1.8rem;
+  font-weight: 900; color: var(--gold);
+}
+.about-stat-lbl {
+  font-family: var(--font-mono); font-size: 0.6rem;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(255,255,255,0.4); margin-top: 3px;
+}
+
+@media (max-width: 768px) {
+  .about-grid { grid-template-columns: 1fr; }
+  .about-values { grid-template-columns: 1fr 1fr; }
+}
+
+/* ============================================================
+   STORY
+   ============================================================ */
+#story { background: var(--ivory); }
+.story-layout {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: clamp(48px,7vw,100px); align-items: start;
+}
+.story-left { position: sticky; top: 100px; }
+.story-left .section-p { margin-bottom: 32px; }
+.story-large-quote {
+  background: var(--gold);
+  border-radius: 16px; padding: 32px;
+  margin-top: 32px;
+}
+.story-large-quote p {
+  font-family: var(--font-head); font-size: 1.2rem;
+  font-weight: 700; color: var(--black);
+  line-height: 1.5;
+}
+.story-timeline { display: flex; flex-direction: column; gap: 0; }
+.timeline-item {
+  display: flex; gap: 24px;
+  padding-bottom: 40px; position: relative;
+}
+.timeline-item:last-child { padding-bottom: 0; }
+.timeline-left {
+  display: flex; flex-direction: column; align-items: center;
+}
+.tl-dot {
+  width: 14px; height: 14px; background: var(--gold);
+  border-radius: 50%; flex-shrink: 0;
+  box-shadow: 0 0 0 4px rgba(245,158,11,0.15);
+  transition: box-shadow 0.3s;
+}
+.timeline-item:hover .tl-dot { box-shadow: 0 0 0 8px rgba(245,158,11,0.15); }
+.tl-line {
+  width: 1.5px; flex: 1; min-height: 40px;
+  background: linear-gradient(to bottom, var(--gold), rgba(245,158,11,0.1));
+  margin-top: 6px;
+}
+.timeline-item:last-child .tl-line { display: none; }
+.tl-body {
+  background: var(--white); border-radius: 14px;
+  padding: 22px 24px; flex: 1;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.timeline-item:hover .tl-body { transform: translateX(6px); box-shadow: var(--shadow-md); }
+.tl-label {
+  font-family: var(--font-mono); font-size: 0.62rem;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--gold-dark); margin-bottom: 8px;
+}
+.tl-title {
+  font-family: var(--font-head); font-weight: 700;
+  font-size: 1.05rem; color: var(--black); margin-bottom: 8px;
+}
+.tl-text {
+  font-family: var(--font-body); font-size: 0.88rem;
+  color: var(--ink-light); line-height: 1.7;
+}
+@media (max-width: 768px) {
+  .story-layout { grid-template-columns: 1fr; }
+  .story-left { position: relative; top: auto; }
+}
+
+/* ============================================================
+   PRODUCTS
+   ============================================================ */
+#products { background: var(--white); }
+.products-header { text-align: center; max-width: 620px; margin: 0 auto 56px; }
+.products-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr 1fr;
+  gap: 22px;
+}
+.product-card {
+  background: var(--ivory); border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  transition: transform 0.4s var(--ease-out), box-shadow 0.4s;
+  position: relative;
+}
+.product-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); }
+.product-card.featured {
+  background: var(--black);
+  grid-row: span 1;
+}
+.product-top {
+  padding: 32px 28px 24px;
+}
+.product-eyebrow {
+  font-family: var(--font-mono); font-size: 0.6rem;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.featured .product-eyebrow { color: var(--gold); }
+.product-eyebrow-muted { color: var(--ink-light); }
+.product-title {
+  font-family: var(--font-head); font-weight: 900;
+  font-size: 1.3rem; line-height: 1.2; margin-bottom: 12px;
+}
+.featured .product-title { color: var(--white); }
+.product-desc {
+  font-family: var(--font-body); font-size: 0.85rem;
+  line-height: 1.65;
+}
+.featured .product-desc { color: rgba(255,255,255,0.55); }
+.product-desc-muted { color: var(--ink-light); }
+.product-pills {
+  display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px;
+}
+.pill {
+  font-family: var(--font-mono); font-size: 0.58rem;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 4px 10px; border-radius: 100px;
+}
+.pill-gold { background: var(--gold-pale); color: var(--gold-dark); }
+.pill-dark { background: rgba(245,158,11,0.12); color: var(--gold); border: 1px solid rgba(245,158,11,0.2); }
+.pill-grey { background: var(--white); color: var(--ink-light); border: 1px solid var(--border); }
+.product-bottom { padding: 0 28px 28px; }
+.product-btn {
+  display: block; text-align: center;
+  padding: 13px; border-radius: 10px;
+  font-family: var(--font-body); font-weight: 700; font-size: 0.88rem;
+  text-decoration: none; transition: all 0.3s var(--ease-out);
+}
+.product-btn-gold {
+  background: var(--gold); color: var(--black);
+  box-shadow: 0 3px 0 var(--gold-dark);
+}
+.product-btn-gold:hover { transform: translateY(-2px); box-shadow: 0 6px 0 var(--gold-dark), 0 14px 30px rgba(245,158,11,0.25); }
+.product-btn-ghost {
+  background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.4);
+  border: 1px dashed rgba(255,255,255,0.12);
+  cursor: not-allowed;
+}
+.product-featured-badge {
+  position: absolute; top: 20px; right: 20px;
+  background: var(--gold); color: var(--black);
+  font-family: var(--font-mono); font-size: 0.58rem;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  padding: 4px 10px; border-radius: 4px; font-weight: 700;
+}
+.product-coming-badge {
+  position: absolute; top: 20px; right: 20px;
+  background: var(--ivory-2); color: var(--ink-light);
+  font-family: var(--font-mono); font-size: 0.58rem;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  padding: 4px 10px; border-radius: 4px;
+  border: 1px solid var(--border);
+}
+.product-mockup-area {
+  height: 140px; display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.product-book {
+  width: 80px; height: 108px;
+  background: linear-gradient(145deg, var(--gold) 0%, var(--gold-dark) 100%);
+  border-radius: 4px 10px 10px 4px;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: -6px 6px 20px rgba(0,0,0,0.3), 4px 4px 0 rgba(0,0,0,0.2);
+  position: relative;
+  transform: perspective(400px) rotateY(-8deg);
+  transition: transform 0.4s;
+}
+.product-card:hover .product-book { transform: perspective(400px) rotateY(0); }
+.product-book-spine {
+  position: absolute; left: 0; top: 0; bottom: 0;
+  width: 10px; background: var(--gold-dark);
+  border-radius: 4px 0 0 4px;
+}
+.product-book-text {
+  font-family: var(--font-head); font-weight: 900;
+  font-size: 0.55rem; color: var(--black);
+  text-align: center; padding: 8px; line-height: 1.3;
+}
+@media (max-width: 900px) {
+  .products-grid { grid-template-columns: 1fr; }
+}
+
+/* ============================================================
+   PREVIEW
+   ============================================================ */
+#preview { background: var(--ivory); }
+.preview-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: clamp(48px,7vw,100px); align-items: center;
+}
+.preview-features { list-style: none; margin: 28px 0 36px; }
+.preview-feat {
+  display: flex; align-items: flex-start; gap: 14px;
+  padding: 14px 0; border-bottom: 1px solid var(--border);
+}
+.preview-feat:last-child { border-bottom: none; }
+.feat-icon {
+  width: 32px; height: 32px; border-radius: 8px;
+  background: var(--gold-pale); display: flex; align-items: center;
+  justify-content: center; font-size: 0.9rem; flex-shrink: 0;
+  border: 1px solid rgba(245,158,11,0.2);
+}
+.feat-text {
+  font-family: var(--font-body); font-size: 0.9rem;
+  color: var(--ink-mid); line-height: 1.6;
+}
+.feat-text strong { color: var(--black); font-weight: 600; }
+
+/* Device mockup */
+.device-wrap { display: flex; justify-content: center; position: relative; }
+.phone-outer {
+  width: 260px;
+  background: var(--black);
+  border-radius: 38px;
+  padding: 14px;
+  box-shadow: 0 40px 80px rgba(0,0,0,0.2), 0 0 0 1px rgba(255,255,255,0.1);
+  position: relative;
+}
+.phone-outer::before {
+  content: ''; position: absolute;
+  top: 12px; left: 50%; transform: translateX(-50%);
+  width: 72px; height: 5px;
+  background: rgba(255,255,255,0.12); border-radius: 3px;
+}
+.phone-screen-inner {
+  background: #F5F0E8; border-radius: 26px; overflow: hidden;
+  min-height: 480px;
+}
+.ps-top {
+  background: white; padding: 18px 14px 12px;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.ps-brand { font-weight: 700; font-size: 0.7rem; color: #1A1A1A; }
+.ps-badge {
+  background: rgba(245,158,11,0.15); color: var(--gold-dark);
+  font-size: 0.6rem; padding: 3px 8px; border-radius: 20px;
+  border: 1px solid rgba(245,158,11,0.25); font-weight: 600;
+}
+.ps-body { padding: 18px 14px; }
+.ps-eyebrow { font-size: 0.6rem; color: var(--gold-dark); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 6px; }
+.ps-title { font-weight: 900; font-size: 1.1rem; color: #1A1A1A; line-height: 1.25; margin-bottom: 6px; }
+.ps-title span { color: var(--gold-dark); font-style: italic; }
+.ps-desc { font-size: 0.7rem; color: #777; line-height: 1.5; margin-bottom: 14px; }
+.ps-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 6px; margin-bottom: 14px; }
+.ps-stat { background: white; border-radius: 8px; padding: 10px 6px; text-align: center; }
+.ps-stat-n { font-weight: 900; font-size: 1rem; color: var(--gold-dark); display: block; }
+.ps-stat-l { font-size: 0.56rem; color: #999; text-transform: uppercase; letter-spacing: 0.05em; }
+.ps-btn { background: var(--gold-dark); color: white; border: none; border-radius: 8px; padding: 10px; font-size: 0.78rem; font-weight: 700; width: 100%; margin-bottom: 6px; cursor: pointer; }
+.ps-btn2 { background: white; color: #1A1A1A; border: 1px solid #e0e0e0; border-radius: 8px; padding: 10px; font-size: 0.78rem; font-weight: 500; width: 100%; cursor: pointer; }
+
+.phone-glow {
+  position: absolute; bottom: -30px; left: 50%; transform: translateX(-50%);
+  width: 180px; height: 50px;
+  background: radial-gradient(ellipse, rgba(245,158,11,0.3) 0%, transparent 70%);
+  filter: blur(16px);
+}
+
+.preview-floating-card {
+  position: absolute; right: -20px; bottom: 80px;
+  background: white; border-radius: 14px; padding: 14px 16px;
+  box-shadow: var(--shadow-md); border: 1px solid var(--border);
+  min-width: 160px;
+  animation: float 3.5s ease-in-out infinite;
+}
+.pfc-label { font-family: var(--font-mono); font-size: 0.58rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 4px; }
+.pfc-value { font-family: var(--font-head); font-weight: 900; font-size: 1.1rem; color: var(--black); }
+.pfc-sub { font-size: 0.72rem; color: var(--ink-light); margin-top: 2px; }
+
+@media (max-width: 768px) { .preview-grid { grid-template-columns: 1fr; } }
+
+/* ============================================================
+   TESTIMONIALS
+   ============================================================ */
+#testimonials { background: var(--white); }
+.testimonials-header { text-align: center; max-width: 560px; margin: 0 auto 52px; }
+.testi-grid {
+  display: grid; grid-template-columns: repeat(3,1fr);
+  gap: 20px;
+}
+.testi-card {
+  background: var(--ivory); border-radius: 16px; padding: 28px;
+  border: 1px solid var(--border);
+  transition: transform 0.3s, box-shadow 0.3s;
+  position: relative;
+}
+.testi-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); }
+.testi-card.placeholder { opacity: 0.45; }
+.stars { display: flex; gap: 3px; margin-bottom: 14px; }
+.star-icon { color: var(--gold); font-size: 0.9rem; }
+.testi-quote {
+  font-family: var(--font-head); font-style: italic;
+  font-size: 1rem; color: var(--black);
+  line-height: 1.6; margin-bottom: 20px;
+}
+.testi-author { display: flex; align-items: center; gap: 11px; }
+.testi-ava {
+  width: 38px; height: 38px; border-radius: 50%;
+  background: var(--gold); display: flex; align-items: center;
+  justify-content: center; font-family: var(--font-head);
+  font-weight: 900; font-size: 0.9rem; color: var(--black);
+  flex-shrink: 0;
+}
+.testi-name { font-weight: 600; font-size: 0.88rem; color: var(--black); }
+.testi-loc {
+  font-family: var(--font-mono); font-size: 0.6rem;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--ink-light); margin-top: 1px;
+}
+.testi-note { text-align: center; margin-top: 40px; font-family: var(--font-body); color: var(--ink-light); font-size: 0.9rem; }
+.testi-note strong { color: var(--gold-dark); }
+@media (max-width: 768px) { .testi-grid { grid-template-columns: 1fr; } }
+
+/* ============================================================
+   CTA BAND
+   ============================================================ */
+.cta-band {
+  background: var(--black);
+  padding: clamp(64px,8vw,100px) clamp(20px,5vw,72px);
+  text-align: center; position: relative; overflow: hidden;
+}
+.cta-band::before {
+  content: '';
+  position: absolute; top: -100px; left: 50%; transform: translateX(-50%);
+  width: 700px; height: 400px;
+  background: radial-gradient(ellipse, rgba(245,158,11,0.15) 0%, transparent 70%);
+  border-radius: 50%; pointer-events: none;
+}
+.cta-band-label {
+  font-family: var(--font-mono); font-size: 0.68rem;
+  letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 16px; position: relative;
+}
+.cta-band-h2 {
+  font-family: var(--font-head); font-weight: 900;
+  font-size: clamp(2rem,4.5vw,3.8rem); line-height: 1.1;
+  color: var(--white); margin-bottom: 16px; position: relative;
+}
+.cta-band-h2 em { font-style: italic; color: var(--gold); }
+.cta-band-p {
+  font-family: var(--font-body); font-size: 1rem;
+  color: rgba(255,255,255,0.55); max-width: 480px;
+  margin: 0 auto 36px; line-height: 1.7; position: relative;
+}
+.cta-band-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; position: relative; }
+.btn-gold-lg {
+  background: var(--gold); color: var(--black);
+  padding: 16px 40px; border-radius: 8px;
+  font-family: var(--font-body); font-weight: 700; font-size: 1rem;
+  text-decoration: none; display: inline-block;
+  box-shadow: 0 4px 0 var(--gold-dark);
+  transition: all 0.3s var(--ease-out);
+}
+.btn-gold-lg:hover { transform: translateY(-3px); box-shadow: 0 7px 0 var(--gold-dark), 0 20px 40px rgba(245,158,11,0.3); }
+.btn-white-outline {
+  background: transparent; color: rgba(255,255,255,0.7);
+  padding: 16px 40px; border-radius: 8px;
+  border: 1.5px solid rgba(255,255,255,0.2);
+  font-family: var(--font-body); font-weight: 500; font-size: 1rem;
+  text-decoration: none; display: inline-block;
+  transition: all 0.3s;
+}
+.btn-white-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+/* ============================================================
+   CONTACT
+   ============================================================ */
+#contact { background: var(--ivory); }
+.contact-grid {
+  display: grid; grid-template-columns: 1fr 1.4fr;
+  gap: clamp(40px,6vw,90px); align-items: start;
+}
+.contact-methods { display: flex; flex-direction: column; gap: 14px; margin-top: 32px; }
+.contact-method {
+  display: flex; align-items: center; gap: 14px;
+  background: var(--white); border-radius: 12px; padding: 16px 18px;
+  border: 1px solid var(--border); text-decoration: none;
+  transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+.contact-method:hover { border-color: var(--gold); transform: translateX(5px); box-shadow: var(--shadow-sm); }
+.cm-icon {
+  width: 40px; height: 40px; background: var(--gold-pale);
+  border-radius: 10px; display: flex; align-items: center;
+  justify-content: center; flex-shrink: 0;
+}
+.cm-label { font-family: var(--font-mono); font-size: 0.58rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 2px; }
+.cm-value { font-family: var(--font-body); font-weight: 600; font-size: 0.88rem; color: var(--black); }
+
+.contact-form-box {
+  background: var(--white); border-radius: 20px;
+  padding: clamp(28px,4vw,44px); border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+}
+.form-h { font-family: var(--font-head); font-size: 1.5rem; font-weight: 700; color: var(--black); margin-bottom: 6px; }
+.form-sub { font-family: var(--font-body); font-size: 0.88rem; color: var(--ink-light); margin-bottom: 28px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.form-group { margin-bottom: 18px; }
+.form-lbl {
+  display: block; font-family: var(--font-mono); font-size: 0.6rem;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--ink-light); margin-bottom: 7px;
+}
+.form-inp {
+  width: 100%; background: var(--ivory); border: 1.5px solid var(--border);
+  border-radius: 8px; padding: 12px 14px;
+  font-family: var(--font-body); font-size: 0.93rem; color: var(--black);
+  outline: none; transition: border-color 0.3s, box-shadow 0.3s;
+  appearance: none;
+}
+.form-inp:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(245,158,11,0.12); }
+.form-inp::placeholder { color: rgba(0,0,0,0.25); }
+select.form-inp {
+  background-image: url("https://raw.githubusercontent.com/obinna18/Vearnly/main/about-founder.jpg'http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 14px center; padding-right: 40px; cursor: pointer;
+}
+textarea.form-inp { resize: vertical; min-height: 110px; }
+.form-btn {
+  width: 100%; background: var(--gold); color: var(--black);
+  border: none; border-radius: 8px; padding: 15px;
+  font-family: var(--font-body); font-weight: 700; font-size: 0.95rem;
+  cursor: pointer; transition: all 0.3s var(--ease-out);
+  box-shadow: 0 3px 0 var(--gold-dark);
+}
+.form-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 0 var(--gold-dark), 0 14px 30px rgba(245,158,11,0.25); }
+.form-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; box-shadow: 0 3px 0 var(--gold-dark); }
+.form-error { color: #DC2626; font-size: 0.83rem; margin-top: 10px; font-family: var(--font-body); display: none; }
+.form-success-msg {
+  display: none; text-align: center; padding: 32px 16px;
+}
+.form-success-msg.show { display: block; }
+.fs-icon { font-size: 2.5rem; margin-bottom: 12px; }
+.fs-title { font-family: var(--font-head); font-size: 1.4rem; font-weight: 700; color: var(--gold-dark); margin-bottom: 8px; }
+.fs-body { font-family: var(--font-body); color: var(--ink-mid); font-size: 0.9rem; line-height: 1.6; }
+@media (max-width: 768px) {
+  .contact-grid { grid-template-columns: 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer {
+  background: var(--black);
+  padding: 64px clamp(20px,5vw,72px) 32px;
+}
+.footer-grid {
+  max-width: 1200px; margin: 0 auto;
+  display: grid; grid-template-columns: 2fr 1fr 1fr;
+  gap: 56px; margin-bottom: 48px;
+}
+.footer-logo-img { height: 44px; width: auto; margin-bottom: 10px; }
+.footer-brand-name {
+  font-family: var(--font-head); font-size: 1.4rem; font-weight: 900;
+  color: var(--white); letter-spacing: 0.12em; margin-bottom: 4px;
+}
+.footer-tagline {
+  font-family: var(--font-mono); font-size: 0.65rem;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: rgba(255,255,255,0.3); margin-bottom: 14px;
+}
+.footer-desc { font-family: var(--font-body); font-size: 0.88rem; color: rgba(255,255,255,0.35); line-height: 1.7; max-width: 300px; margin-bottom: 24px; }
+.footer-socials { display: flex; gap: 10px; }
+.social-btn {
+  width: 38px; height: 38px; background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.08); border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  text-decoration: none; color: rgba(255,255,255,0.4);
+  transition: all 0.3s;
+}
+.social-btn:hover { background: var(--gold); border-color: var(--gold); color: var(--black); transform: translateY(-3px); }
+.footer-col-title {
+  font-family: var(--font-mono); font-size: 0.63rem;
+  letter-spacing: 0.25em; text-transform: uppercase;
+  color: rgba(255,255,255,0.3); margin-bottom: 18px;
+}
+.footer-links { list-style: none; display: flex; flex-direction: column; gap: 11px; }
+.footer-links a {
+  font-family: var(--font-body); font-size: 0.88rem;
+  color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.2s;
+}
+.footer-links a:hover { color: var(--white); }
+.footer-bottom {
+  max-width: 1200px; margin: 0 auto;
+  padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.06);
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;
+}
+.footer-copy { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.08em; color: rgba(255,255,255,0.2); }
+@media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr; gap: 36px; } }
+
+/* ============================================================
+   MODAL
+   ============================================================ */
+.modal-bg {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(6px); z-index: 2000;
+  display: flex; align-items: center; justify-content: center; padding: 20px;
+  opacity: 0; visibility: hidden; transition: opacity 0.3s, visibility 0.3s;
+}
+.modal-bg.open { opacity: 1; visibility: visible; }
+.modal-box {
+  background: var(--white); border-radius: 20px;
+  padding: 36px; max-width: 560px; width: 100%;
+  position: relative; transform: scale(0.94) translateY(16px);
+  transition: transform 0.3s var(--ease-out);
+  max-height: 85vh; overflow-y: auto;
+}
+.modal-bg.open .modal-box { transform: scale(1) translateY(0); }
+.modal-x {
+  position: absolute; top: 14px; right: 14px;
+  background: var(--ivory); border: 1px solid var(--border);
+  border-radius: 8px; width: 34px; height: 34px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; font-size: 1rem; color: var(--ink-light);
+  transition: all 0.2s;
+}
+.modal-x:hover { background: var(--black); color: var(--white); }
+.modal-title { font-family: var(--font-head); font-size: 1.5rem; font-weight: 700; color: var(--black); margin-bottom: 6px; }
+.modal-sub { font-family: var(--font-body); font-size: 0.88rem; color: var(--ink-light); margin-bottom: 24px; }
+.modal-modules { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.m-module {
+  display: flex; align-items: center; gap: 12px;
+  background: var(--ivory); border-radius: 10px; padding: 12px 14px;
+  border: 1px solid var(--border); transition: background 0.2s;
+}
+.m-module:hover { background: var(--gold-pale); }
+.m-num { font-family: var(--font-mono); font-size: 0.62rem; color: var(--gold-dark); min-width: 28px; font-weight: 700; }
+.m-name { font-family: var(--font-body); font-size: 0.88rem; color: var(--black); font-weight: 500; }
+.m-count { margin-left: auto; font-family: var(--font-mono); font-size: 0.6rem; color: var(--ink-light); }
+.modal-cta-row { padding-top: 20px; border-top: 1px solid var(--border); margin-top: 16px; text-align: center; }
+</style>
+</head>
+<body>
+
+<!-- LOADER -->
+<div id="loader">
+  <img src="https://raw.githubusercontent.com/obinna18/Vearnly/main/about-founder.jpg" alt="Vearnly" class="loader-logo-img">
+  <div class="loader-text">VEARNLY</div>
+      <img src="https://raw.githubusercontent.com/obinna18/Vearnly/main/learn-earn-grow.jpg" alt="Learn. Earn. Grow." style="width:100%;border-radius:16px;margin-top:28px;box-shadow:var(--shadow-md);">
+  <div class="loader-line"></div>
+</div>
+
+<!-- CURSORS -->
+<div class="cursor" id="cur"></div>
+<div class="cursor-ring" id="cur-ring"></div>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <a href="#hero" class="nav-logo">
+    
+    <span class="nav-logo-text">Vearnly</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#story">Story</a></li>
+    <li><a href="#products">Products</a></li>
+    <li><a href="#preview">Platform</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="https://selar.com/m/vearnly" target="_blank" class="nav-btn">Get Access</a></li>
+  </ul>
+  <button class="hamburger" id="ham"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mob-menu">
+  <a href="#about" class="mob-link">About</a>
+  <a href="#story" class="mob-link">Story</a>
+  <a href="#products" class="mob-link">Products</a>
+  <a href="#preview" class="mob-link">Platform</a>
+  <a href="#contact" class="mob-link">Contact</a>
+  <a href="https://selar.com/m/vearnly" target="_blank" class="mob-cta">Get Access</a>
+</div>
+
+<!-- HERO -->
+<section id="hero" style="position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden;padding:0;">
+  <div style="position:absolute;inset:0;background:url('https://raw.githubusercontent.com/obinna18/Vearnly/main/hero-bg.jpg') center/cover no-repeat;z-index:0;"></div>
+  <div style="position:absolute;inset:0;background:linear-gradient(to bottom, rgba(0,0,0,0.62) 0%, rgba(0,0,0,0.75) 100%);z-index:1;"></div>
+  <div style="position:relative;z-index:2;max-width:860px;padding:120px clamp(20px,5vw,60px) 80px;animation:hero-in 0.9s var(--ease-out) 0.8s both;">
+    <div class="hero-tag" style="margin:0 auto 28px;">Nigeria's Premium Knowledge Platform</div>
+    <h1 class="hero-h1" style="color:var(--white);font-size:clamp(2.8rem,6vw,5.5rem);">
+      The Platform Built to Make<br>
+      <em>Nigerians</em> <span class="underline-gold" style="color:var(--gold);">Wealthy</span><br>
+      Through Knowledge
+    </h1>
+    <p class="hero-sub" style="color:rgba(255,255,255,0.75);max-width:580px;margin:0 auto 44px;">
+      Proven income education. Real strategies. Zero fluff.
+      Everything you need to build serious online income, in one place.
+    </p>
+    <div class="hero-btns" style="justify-content:center;margin-bottom:56px;">
+      <a href="#products" class="btn-gold">Explore Courses</a>
+      <a href="https://selar.com/m/vearnly" target="_blank" class="btn-outline" style="color:rgba(255,255,255,0.8);border-color:rgba(255,255,255,0.3);">Get the Playbook</a>
+    </div>
+    <div class="hero-proof" style="justify-content:center;">
+      <div class="proof-item">
+        <span class="proof-num" data-count="40" style="color:var(--white);">0</span>
+        <span class="proof-label" style="color:rgba(255,255,255,0.5);">Income<br>Streams</span>
+      </div>
+      <div class="proof-divider" style="background:rgba(255,255,255,0.2);"></div>
+      <div class="proof-item">
+        <span class="proof-num" data-count="200" data-suffix="+" style="color:var(--white);">0</span>
+        <span class="proof-label" style="color:rgba(255,255,255,0.5);">Lessons</span>
+      </div>
+      <div class="proof-divider" style="background:rgba(255,255,255,0.2);"></div>
+      <div class="proof-item">
+        <span class="proof-num" style="color:var(--white);">100%</span>
+        <span class="proof-label" style="color:rgba(255,255,255,0.5);">Proven<br>Models</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="section-wrap" style="background:var(--white)">
+  <div class="max-w">
+    <div class="about-grid">
+      <div class="rv-l">
+        <span class="eyebrow">Who We Are</span>
+        <h2 class="section-h2">Knowledge that <em>actually</em> pays off</h2>
+        <div class="divider"></div>
+        <p class="section-p about-p">Vearnly is a premium knowledge platform built specifically for Nigerians ready to take financial education seriously. No hype. No vague promises. Proven income models, real strategies, and step-by-step systems that work in the Nigerian context.</p>
+        <p class="section-p about-p">Every course, every module, every lesson is built on one foundation: authenticity. If it has not been proven to work, it does not make it onto this platform.</p>
+        <div class="about-values">
+          <div class="value-card rv d1">
+            <div class="value-icon">&#128218;</div>
+            <div class="value-title">Deep Education</div>
+            <div class="value-desc">Full blueprints with action plans. Not surface-level tips.</div>
+          </div>
+          <div class="value-card rv d2">
+            <div class="value-icon">&#127881;</div>
+            <div class="value-title">Nigerian Relevance</div>
+            <div class="value-desc">Strategies built for the Nigerian market and reality.</div>
+          </div>
+          <div class="value-card rv d3">
+            <div class="value-icon">&#128200;</div>
+            <div class="value-title">Proven Models</div>
+            <div class="value-desc">Every income stream is verified and battle-tested.</div>
+          </div>
+          <div class="value-card rv d4">
+            <div class="value-icon">&#127775;</div>
+            <div class="value-title">Premium Quality</div>
+            <div class="value-desc">No filler. Just structured, serious learning.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-visual-wrap rv-r">
+        <div style="position:relative;">
+          <img src="https://raw.githubusercontent.com/obinna18/Vearnly/main/about-founder.jpg" alt="Vearnly founder" style="width:100%;border-radius:20px;box-shadow:var(--shadow-lg);object-fit:cover;max-height:520px;">
+          <div style="position:absolute;bottom:24px;left:24px;right:24px;background:var(--white);border-radius:14px;padding:20px 24px;box-shadow:var(--shadow-md);">
+            <p style="font-family:var(--font-head);font-style:italic;font-size:0.95rem;color:var(--ink);line-height:1.55;margin-bottom:14px;">"We built the knowledge platform we wish had existed when we started."</p>
+            <div style="display:flex;align-items:center;gap:12px;">
+              <div class="founder-ava">O</div>
+              <div>
+                <div class="founder-name" style="color:var(--black);">Obinna Egenti</div>
+                <div class="founder-role">Founder, Vearnly &middot; Lagos, Nigeria</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STORY -->
+<section id="story" class="section-wrap">
+  <div class="max-w">
+    <div class="story-layout">
+      <div class="story-left rv-l">
+        <span class="eyebrow">Our Journey</span>
+        <h2 class="section-h2">Built from <em>real search</em>, not theory</h2>
+        <div class="divider"></div>
+        <p class="section-p">This platform exists because one person couldn't find what he was looking for. So he built it. And now it exists for every Nigerian who is exactly where he was.</p>
+        <div class="story-large-quote">
+          <p>"Vearnly exists because the knowledge gap is real. And so is the opportunity waiting on the other side of it."</p>
+        </div>
+      </div>
+
+      <div class="story-timeline">
+        <div class="timeline-item rv d1">
+          <div class="timeline-left"><div class="tl-dot"></div><div class="tl-line"></div></div>
+          <div class="tl-body">
+            <div class="tl-label">The Question</div>
+            <h3 class="tl-title">Where is the real roadmap?</h3>
+            <p class="tl-text">Like millions of Nigerians, the search began. Not for motivation or quotes. For a real, structured, step-by-step guide to building income online in a way that made sense for Lagos.</p>
+          </div>
+        </div>
+        <div class="timeline-item rv d2">
+          <div class="timeline-left"><div class="tl-dot"></div><div class="tl-line"></div></div>
+          <div class="tl-body">
+            <div class="tl-label">The Frustration</div>
+            <h3 class="tl-title">Everything was fragmented</h3>
+            <p class="tl-text">The information existed. But never in one place. Never contextualised for Nigeria. Never built by someone who understood the local landscape. The gap was not knowledge. It was organised, relevant, proven knowledge.</p>
+          </div>
+        </div>
+        <div class="timeline-item rv d3">
+          <div class="timeline-left"><div class="tl-dot"></div><div class="tl-line"></div></div>
+          <div class="tl-body">
+            <div class="tl-label">The Decision</div>
+            <h3 class="tl-title">If it doesn't exist, build it</h3>
+            <p class="tl-text">Vearnly is the platform that should have existed. Built by someone who went through the search, tested the income models, and structured everything into a library any Nigerian can actually use.</p>
+          </div>
+        </div>
+        <div class="timeline-item rv d4">
+          <div class="timeline-left"><div class="tl-dot"></div><div class="tl-line"></div></div>
+          <div class="tl-body">
+            <div class="tl-label">Today</div>
+            <h3 class="tl-title">Vearnly is live. And growing.</h3>
+            <p class="tl-text">The 6-Figure Digital Playbook launched first: 40 income streams, 200+ lessons, all with action plans and setup guides. This is just the beginning. More products. Same standard.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section id="products" class="section-wrap" style="background:var(--white)">
+  <div class="max-w">
+    <div class="products-header rv">
+      <span class="eyebrow">What We Offer</span>
+      <h2 class="section-h2">Products built for <em>serious</em> people</h2>
+      <p class="section-p">One standard: does it actually work? If yes, it's here.</p>
+    </div>
+    <div class="products-grid">
+      <!-- Featured -->
+      <div class="product-card featured rv d1">
+        <div class="product-featured-badge">Live Now</div>
+        <div class="product-top">
+          <div class="product-eyebrow">Flagship Product</div>
+          <div class="product-title" style="color:var(--white)">The 6-Figure Digital Playbook</div>
+          <div class="product-desc product-desc" style="color:rgba(255,255,255,0.5)">40 proven income blueprints with step-by-step setup guides, real tools, and action plans. Everything to build serious online income.</div>
+          <div class="product-pills">
+            <span class="pill pill-dark">40 Streams</span>
+            <span class="pill pill-dark">200+ Lessons</span>
+            <span class="pill pill-dark">Step-by-Step</span>
+          </div>
+        </div>
+        <div class="product-mockup-area" style="background:rgba(245,158,11,0.06);">
+          <div class="product-book">
+            <div class="product-book-spine"></div>
+            <div class="product-book-text">6-FIGURE DIGITAL PLAYBOOK</div>
+          </div>
+        </div>
+        <div class="product-bottom" style="padding-top:20px;">
+          <div style="display:flex;gap:10px;margin-bottom:10px;">
+            <a href="https://selar.com/m/vearnly" target="_blank" class="product-btn product-btn-gold" style="flex:1">Get Access</a>
+            <button onclick="document.getElementById('preview-modal').classList.add('open')" class="product-btn" style="flex:1;background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.6);border:1px solid rgba(255,255,255,0.12);border-radius:10px;font-family:var(--font-body);font-weight:600;font-size:0.88rem;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='rgba(255,255,255,0.08)'">See Inside</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Coming Soon 1 -->
+      <div class="product-card rv d2" style="opacity:0.6">
+        <div class="product-coming-badge">Coming Soon</div>
+        <div class="product-top">
+          <div class="product-eyebrow product-eyebrow-muted">In Development</div>
+          <div class="product-title" style="color:var(--ink-mid)">Freelance Mastery Blueprint</div>
+          <div class="product-desc product-desc-muted">Build a 6-figure freelance career from Nigeria. Clients, pricing, delivery, and scaling. Fully mapped.</div>
+          <div class="product-pills"><span class="pill pill-grey">Freelancing</span><span class="pill pill-grey">Coming 2026</span></div>
+        </div>
+        <div class="product-mockup-area" style="background:var(--ivory-2);">
+          <div class="product-book" style="background:linear-gradient(145deg,#aaa,#888);">
+            <div class="product-book-spine" style="background:#777"></div>
+            <div class="product-book-text" style="color:#eee;font-size:0.5rem">COMING SOON</div>
+          </div>
+        </div>
+        <div class="product-bottom">
+          <div class="product-btn product-btn-ghost">Notify Me</div>
+        </div>
+      </div>
+
+      <!-- Coming Soon 2 -->
+      <div class="product-card rv d3" style="opacity:0.6">
+        <div class="product-coming-badge">Coming Soon</div>
+        <div class="product-top">
+          <div class="product-eyebrow product-eyebrow-muted">In Development</div>
+          <div class="product-title" style="color:var(--ink-mid)">Content Creator Playbook</div>
+          <div class="product-desc product-desc-muted">Turn your content into consistent income. Monetisation for Nigerian creators across every platform.</div>
+          <div class="product-pills"><span class="pill pill-grey">Content</span><span class="pill pill-grey">Coming 2026</span></div>
+        </div>
+        <div class="product-mockup-area" style="background:var(--ivory-2);">
+          <div class="product-book" style="background:linear-gradient(145deg,#aaa,#888);">
+            <div class="product-book-spine" style="background:#777"></div>
+            <div class="product-book-text" style="color:#eee;font-size:0.5rem">COMING SOON</div>
+          </div>
+        </div>
+        <div class="product-bottom">
+          <div class="product-btn product-btn-ghost">Notify Me</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PREVIEW -->
+<section id="preview" class="section-wrap">
+  <div class="max-w">
+    <div class="preview-grid">
+      <div class="rv-l">
+        <span class="eyebrow">Inside the Platform</span>
+        <h2 class="section-h2">See what <em>serious</em> looks like</h2>
+        <div class="divider"></div>
+        <p class="section-p">The 6-Figure Digital Playbook is not a PDF. It is a full interactive course platform, guiding you from module to module with clarity and purpose.</p>
+        <ul class="preview-features">
+          <li class="preview-feat rv d1">
+            <div class="feat-icon">&#128218;</div>
+            <div class="feat-text"><strong>40 income model modules</strong> with full setup guides and tools</div>
+          </li>
+          <li class="preview-feat rv d2">
+            <div class="feat-icon">&#127894;</div>
+            <div class="feat-text"><strong>200+ individual lessons</strong> covering tools, platforms and action plans</div>
+          </li>
+          <li class="preview-feat rv d3">
+            <div class="feat-icon">&#128200;</div>
+            <div class="feat-text"><strong>Progress tracking</strong> so you always know exactly where you are</div>
+          </li>
+          <li class="preview-feat rv d4">
+            <div class="feat-icon">&#128241;</div>
+            <div class="feat-text"><strong>Mobile optimised.</strong> Access from anywhere, any device, any time.</div>
+          </li>
+          <li class="preview-feat rv d5">
+            <div class="feat-icon">&#128274;</div>
+            <div class="feat-text"><strong>One-time access.</strong> No subscriptions. No recurring fees.</div>
+          </li>
+        </ul>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+          <a href="https://obinna18.github.io" target="_blank" class="btn-gold">Access Platform</a>
+          <button onclick="document.getElementById('preview-modal').classList.add('open')" class="btn-outline" style="cursor:pointer;background:transparent;">Preview Inside</button>
+        </div>
+      </div>
+
+      <div class="rv-r">
+        <div class="device-wrap">
+          <div style="position:relative;border-radius:20px;overflow:hidden;box-shadow:var(--shadow-lg);max-width:480px;width:100%;">
+            <img src="https://raw.githubusercontent.com/obinna18/Vearnly/main/platform-laptop.jpg" alt="Vearnly Platform" style="width:100%;display:block;border-radius:20px;">
+          </div></div>
+          <div class="preview-floating-card">
+            <div class="pfc-label">Modules</div>
+            <div class="pfc-value">40 Streams</div>
+            <div class="pfc-sub">All with action plans</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials" class="section-wrap" style="background:var(--white)">
+  <div class="max-w">
+    <div class="testimonials-header rv">
+      <span class="eyebrow">Social Proof</span>
+      <h2 class="section-h2">What our <em>students</em> say</h2>
+      <p class="section-p">Real results. Real people. Reviews building every day.</p>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card placeholder rv d1">
+        <div class="stars"><span class="star-icon">&#9733;</span><span class="star-icon">&#9733;</span><span class="star-icon">&#9733;</span><span class="star-icon">&#9733;</span><span class="star-icon">&#9733;</span></div>
+        <p class="testi-quote">"This playbook changed how I think about online income entirely. The depth is unlike anything built for Nigerians."</p>
+        <div class="testi-author">
+          <div class="testi-ava">A</div>
+          <div><div class="testi-name">Adaeze O.</div><div class="testi-loc">Lagos, Nigeria</div></div>
+        </div>
+      </div>
+      <div class="testi-card placeholder rv d2">
+        <div class="stars"><span class="star-icon">&#9733;</span><span class="star-icon">&#9733;</span><span class="star-icon">&#9733;</span><span class="star-icon">&#9733;</span><span class="star-icon">&#9733;</span></div>
+        <p class="testi-quote">"Finally, income education that actually speaks to where I live. Module 12 alone was worth the entire price."</p>
+        <div class="testi-author">
+          <div class="testi-ava">C</div>
+          <div><div class="testi-name">Chukwuemeka B.</div><div class="testi-loc">Abuja, Nigeria</div></div>
+        </div>
+      </div>
+      <div class="testi-card placeholder rv d3">
+        <div class="stars"><span class="star-icon">&#9733;</span><span class="star-icon">&#9733;</span><span class="star-icon">&#9733;</span><span class="star-icon">&#9733;</span><span class="star-icon">&#9733;</span></div>
+        <p class="testi-quote">"40 income streams with actual setup instructions. Not vague ideas. Real blueprints. I started two within the first week."</p>
+        <div class="testi-author">
+          <div class="testi-ava">F</div>
+          <div><div class="testi-name">Fatima K.</div><div class="testi-loc">Port Harcourt, Nigeria</div></div>
+        </div>
+      </div>
+    </div>
+    <p class="testi-note rv"><strong>Reviews building daily.</strong> Be one of the first 100 and help shape Vearnly's story.</p>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<div class="cta-band rv">
+  <div class="cta-band-label">&#9670; 2026 Is Already Moving</div>
+  <h2 class="cta-band-h2">Are you moving <em>with it?</em></h2>
+  <p class="cta-band-p">Every week you wait is a week someone else is building the income you want. The playbook is live. Access is one click away.</p>
+  <div class="cta-band-btns">
+    <a href="https://selar.com/m/vearnly" target="_blank" class="btn-gold-lg">Get the Playbook Now</a>
+    <a href="#contact" class="btn-white-outline">Talk to Us</a>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<section id="contact" class="section-wrap">
+  <div class="max-w">
+    <div class="contact-grid">
+      <div class="rv-l">
+        <span class="eyebrow">Get in Touch</span>
+        <h2 class="section-h2">Let's <em>talk</em></h2>
+        <div class="divider"></div>
+        <p class="section-p">Have a question, partnership idea, or feedback? Reach out. Every message is read.</p>
+        <div class="contact-methods">
+          <a href="mailto:vearnly@gmail.com" class="contact-method">
+            <div class="cm-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div><div class="cm-label">Email</div><div class="cm-value">vearnly@gmail.com</div></div>
+          </a>
+          <a href="https://www.instagram.com/vearnly?igsh=b242YzV0ZGM0Z256" target="_blank" class="contact-method">
+            <div class="cm-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="#D97706"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            </div>
+            <div><div class="cm-label">Instagram</div><div class="cm-value">@vearnly</div></div>
+          </a>
+          <a href="https://www.facebook.com/share/18RGQ8aYzr/" target="_blank" class="contact-method">
+            <div class="cm-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="#D97706"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </div>
+            <div><div class="cm-label">Facebook</div><div class="cm-value">Vearnly</div></div>
+          </a>
+          <a href="https://selar.com/m/vearnly" target="_blank" class="contact-method">
+            <div class="cm-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 001.98 1.61h9.72a2 2 0 001.98-1.61L23 6H6"/></svg>
+            </div>
+            <div><div class="cm-label">Selar Store</div><div class="cm-value">selar.com/m/vearnly</div></div>
+          </a>
+        </div>
+      </div>
+
+      <div class="rv-r">
+        <div class="contact-form-box">
+          <div id="form-wrap">
+            <div class="form-h">Send a Message</div>
+            <p class="form-sub">We'll respond within 24 hours.</p>
+            <div class="form-group">
+              <label class="form-lbl" for="f-subject">Subject</label>
+              <select class="form-inp" id="f-subject" name="subject">
+                <option value="">Select subject</option>
+                <option value="General">General Enquiry</option>
+                <option value="Support">Support</option>
+                <option value="Partnership">Partnership</option>
+                <option value="Feedback">Feedback</option>
+              </select>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-lbl" for="f-name">Name</label>
+                <input type="text" class="form-inp" id="f-name" placeholder="Your name" autocomplete="name">
+              </div>
+              <div class="form-group">
+                <label class="form-lbl" for="f-email">Email</label>
+                <input type="email" class="form-inp" id="f-email" placeholder="you@email.com" autocomplete="email">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-lbl" for="f-msg">Message</label>
+              <textarea class="form-inp" id="f-msg" placeholder="What's on your mind?"></textarea>
+            </div>
+            <button class="form-btn" id="form-btn" onclick="submitForm(event)">Send Message</button>
+            <div class="form-error" id="form-err"></div>
+          </div>
+          <div class="form-success-msg" id="form-ok">
+            <div class="fs-icon">&#10003;</div>
+            <div class="fs-title">Message Sent!</div>
+            <p class="fs-body">Thank you for reaching out. We'll get back to you within 24 hours. Welcome to the Vearnly family.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="rv">
+      <img src="https://raw.githubusercontent.com/obinna18/Vearnly/main/about-founder.jpg" alt="Vearnly" class="footer-logo-img">
+      <div class="footer-brand-name">VEARNLY</div>
+      <div class="footer-tagline">Learn. Earn. Grow.</div>
+      <p class="footer-desc">Nigeria's premium knowledge platform. Built by someone who searched for this knowledge and decided to build it himself.</p>
+      <div class="footer-socials">
+        <a href="https://www.instagram.com/vearnly?igsh=b242YzV0ZGM0Z256" target="_blank" class="social-btn" aria-label="Instagram">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+        </a>
+        <a href="https://www.facebook.com/share/18RGQ8aYzr/" target="_blank" class="social-btn" aria-label="Facebook">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        </a>
+        <a href="mailto:vearnly@gmail.com" class="social-btn" aria-label="Email">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="rv d1">
+      <div class="footer-col-title">Quick Links</div>
+      <ul class="footer-links">
+        <li><a href="#hero">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#story">Our Story</a></li>
+        <li><a href="#products">Products</a></li>
+        <li><a href="#preview">Platform</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="rv d2">
+      <div class="footer-col-title">Products</div>
+      <ul class="footer-links">
+        <li><a href="https://selar.com/m/vearnly" target="_blank">6-Figure Digital Playbook</a></li>
+        <li><a href="https://obinna18.github.io" target="_blank">Access Platform</a></li>
+        <li><a href="https://selar.com/m/vearnly" target="_blank">Selar Store</a></li>
+        <li><a href="#contact">Partnerships</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; 2026 Vearnly. All rights reserved. &nbsp;|&nbsp; Lagos, Nigeria</span>
+    <span class="footer-copy">Learn. Earn. Grow.</span>
+  </div>
+</footer>
+
+<!-- PREVIEW MODAL -->
+<div class="modal-bg" id="preview-modal" onclick="if(event.target===this)this.classList.remove('open')">
+  <div class="modal-box">
+    <button class="modal-x" onclick="document.getElementById('preview-modal').classList.remove('open')">&#x2715;</button>
+    <div class="modal-title">Inside the Playbook</div>
+    <p class="modal-sub">A sample of the 40 income streams waiting for you.</p>
+    <ul class="modal-modules">
+      <li class="m-module"><span class="m-num">01</span><span class="m-name">Affiliate Marketing Mastery</span><span class="m-count">7 lessons</span></li>
+      <li class="m-module"><span class="m-num">02</span><span class="m-name">Digital Products Creation</span><span class="m-count">6 lessons</span></li>
+      <li class="m-module"><span class="m-num">03</span><span class="m-name">Freelance Writing for Global Clients</span><span class="m-count">5 lessons</span></li>
+      <li class="m-module"><span class="m-num">04</span><span class="m-name">Social Media Management Business</span><span class="m-count">6 lessons</span></li>
+      <li class="m-module"><span class="m-num">05</span><span class="m-name">Dropshipping on Nigerian Platforms</span><span class="m-count">7 lessons</span></li>
+      <li class="m-module"><span class="m-num">06</span><span class="m-name">YouTube Channel Monetisation</span><span class="m-count">5 lessons</span></li>
+      <li class="m-module"><span class="m-num">07</span><span class="m-name">Email Marketing Business</span><span class="m-count">6 lessons</span></li>
+      <li class="m-module"><span class="m-num">08</span><span class="m-name">Online Tutoring and Coaching</span><span class="m-count">5 lessons</span></li>
+      <li class="m-module" style="opacity:0.4"><span class="m-num">...</span><span class="m-name">32 more income streams inside</span><span class="m-count">locked</span></li>
+    </ul>
+    <div class="modal-cta-row">
+      <a href="https://selar.com/m/vearnly" target="_blank" class="btn-gold" style="display:inline-block;padding:14px 40px;">Unlock All 40 Modules</a>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ==== LOADER ==== */
+window.addEventListener('load', () => setTimeout(() => document.getElementById('loader').classList.add('out'), 1400));
+
+/* ==== NAV SCROLL ==== */
+window.addEventListener('scroll', () => {
+  document.getElementById('main-nav').classList.toggle('scrolled', window.scrollY > 40);
+});
+
+/* ==== HAMBURGER ==== */
+const ham = document.getElementById('ham');
+const mobMenu = document.getElementById('mob-menu');
+ham.addEventListener('click', () => {
+  ham.classList.toggle('open');
+  mobMenu.classList.toggle('open');
+});
+document.querySelectorAll('.mob-link, .mob-cta').forEach(l => l.addEventListener('click', () => {
+  ham.classList.remove('open'); mobMenu.classList.remove('open');
+}));
+
+/* ==== CURSOR ==== */
+const cur = document.getElementById('cur');
+const curRing = document.getElementById('cur-ring');
+let mx = 0, my = 0, rx = 0, ry = 0;
+document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+function animCursor() {
+  rx += (mx - rx) * 0.18; ry += (my - ry) * 0.18;
+  cur.style.left = mx + 'px'; cur.style.top = my + 'px';
+  curRing.style.left = rx + 'px'; curRing.style.top = ry + 'px';
+  requestAnimationFrame(animCursor);
+}
+animCursor();
+
+/* ==== SCROLL REVEAL ==== */
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.rv, .rv-l, .rv-r').forEach(el => obs.observe(el));
+
+/* ==== COUNTER ==== */
+const cObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting && !e.target._animated) {
+      e.target._animated = true;
+      const target = parseInt(e.target.dataset.count);
+      const suffix = e.target.dataset.suffix || '';
+      const start = performance.now();
+      const dur = 1400;
+      (function step(now) {
+        const p = Math.min((now - start) / dur, 1);
+        const ease = 1 - Math.pow(1 - p, 3);
+        e.target.textContent = Math.floor(ease * target) + (p === 1 ? suffix : '');
+        if (p < 1) requestAnimationFrame(step);
+      })(start);
+    }
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('[data-count]').forEach(el => cObs.observe(el));
+
+/* ==== PARALLAX ORBs ==== */
+window.addEventListener('mousemove', e => {
+  const x = (e.clientX / window.innerWidth - 0.5) * 20;
+  const y = (e.clientY / window.innerHeight - 0.5) * 20;
+  document.querySelector('.hero-orb-1') && (document.querySelector('.hero-orb-1').style.transform = `translate(${x}px, ${y}px)`);
+  document.querySelector('.hero-orb-2') && (document.querySelector('.hero-orb-2').style.transform = `translate(${-x * 0.5}px, ${-y * 0.5}px)`);
+});
+
+/* ==== HERO CARD TILT ==== */
+const card = document.querySelector('.hero-main-card');
+if (card) {
+  card.addEventListener('mousemove', e => {
+    const rect = card.getBoundingClientRect();
+    const cx = (e.clientX - rect.left) / rect.width - 0.5;
+    const cy = (e.clientY - rect.top) / rect.height - 0.5;
+    card.style.transform = `rotate(${cy * -8}deg) rotateY(${cx * 10}deg) translateZ(0)`;
+  });
+  card.addEventListener('mouseleave', () => { card.style.transform = 'rotate(1deg)'; });
+}
+
+/* ==== FORM ==== */
+function submitForm(e) {
+  e.preventDefault();
+  const name = document.getElementById('f-name').value.trim();
+  const email = document.getElementById('f-email').value.trim();
+  const msg = document.getElementById('f-msg').value.trim();
+  const err = document.getElementById('form-err');
+  const btn = document.getElementById('form-btn');
+  err.style.display = 'none';
+  if (!name || !email || !msg) { err.textContent = 'Please fill in name, email and message.'; err.style.display = 'block'; return; }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { err.textContent = 'Please enter a valid email address.'; err.style.display = 'block'; return; }
+  btn.disabled = true; btn.textContent = 'Sending...';
+  // EmailJS integration: uncomment below once configured
+  /*
+  emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', {
+    name, email, message: msg,
+    subject: document.getElementById('f-subject').value || 'General',
+    reply_to: email
+  }).then(() => showOk()).catch(() => {
+    btn.disabled = false; btn.textContent = 'Send Message';
+    err.textContent = 'Something went wrong. Email us directly at vearnly@gmail.com';
+    err.style.display = 'block';
+  });
+  */
+  setTimeout(showOk, 1200);
+}
+function showOk() {
+  document.getElementById('form-wrap').style.display = 'none';
+  document.getElementById('form-ok').classList.add('show');
+}
+
+/* ==== ESC CLOSE MODAL ==== */
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') document.querySelectorAll('.modal-bg.open').forEach(m => m.classList.remove('open'));
+});
+
+/* ==== SMOOTH LINKS ==== */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const t = document.querySelector(a.getAttribute('href'));
+    if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
+  });
+});
+</script>
+
+<!-- EmailJS SDK (uncomment when ready) -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>emailjs.init("YOUR_PUBLIC_KEY");</script> -->
+
+</body>
+</html>

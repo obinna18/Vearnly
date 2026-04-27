@@ -1131,6 +1131,98 @@ footer {
 .m-name { font-family: var(--font-body); font-size: 0.88rem; color: var(--black); font-weight: 500; }
 .m-count { margin-left: auto; font-family: var(--font-mono); font-size: 0.6rem; color: var(--ink-light); }
 .modal-cta-row { padding-top: 20px; border-top: 1px solid var(--border); margin-top: 16px; text-align: center; }
+
+/* ============================================================
+   VIDEO REEL SECTIONS
+   ============================================================ */
+.vid-reel {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background: var(--black);
+}
+.vid-reel video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+.vid-reel video.vid-playing {
+  opacity: 1;
+}
+
+/* Fullscreen cinematic reel — used for hero-style video banners */
+.vid-reel-full {
+  height: 70vh;
+  min-height: 400px;
+}
+/* Half-height reel — used for inline section dividers */
+.vid-reel-half {
+  height: 50vh;
+  min-height: 300px;
+}
+/* Short accent reel — used for tight in-content breaks */
+.vid-reel-short {
+  height: 36vh;
+  min-height: 240px;
+}
+
+/* Overlay text on top of video */
+.vid-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  text-align: center;
+  padding: clamp(20px, 5vw, 60px);
+  background: linear-gradient(to bottom, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.55) 100%);
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+}
+.vid-overlay.in {
+  opacity: 1;
+  transform: translateY(0);
+}
+.vid-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 12px;
+}
+.vid-headline {
+  font-family: var(--font-head);
+  font-weight: 900;
+  font-size: clamp(1.8rem, 4.5vw, 3.8rem);
+  color: var(--white);
+  line-height: 1.1;
+  max-width: 720px;
+}
+.vid-headline em { font-style: italic; color: var(--gold); }
+.vid-sub {
+  font-family: var(--font-body);
+  font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+  color: rgba(255,255,255,0.72);
+  margin-top: 14px;
+  max-width: 520px;
+  line-height: 1.7;
+}
+
+/* Poster fallback while video hasn't loaded */
+.vid-reel video[poster] { object-position: center; }
+
+@media (max-width: 600px) {
+  .vid-reel-full { height: 55vh; }
+  .vid-reel-half { height: 44vh; }
+  .vid-reel-short { height: 30vh; }
+}
 </style>
 </head>
 <body>
@@ -1211,6 +1303,21 @@ footer {
   </div>
 </section>
 
+<!-- VIDEO REEL 1: THE OPPORTUNITY -->
+<div class="vid-reel vid-reel-full" id="vid-reel-1">
+  <video
+    src="https://raw.githubusercontent.com/obinna18/Vearnly/main/assets/videos/vearnly-opportunity.mp4"
+    poster="https://raw.githubusercontent.com/obinna18/Vearnly/main/assets/videos/poster-opportunity.jpg"
+    muted playsinline loop preload="none"
+    id="v1"
+  ></video>
+  <div class="vid-overlay" id="vid-overlay-1">
+    <span class="vid-eyebrow">&#9670; The Moment is Here</span>
+    <h2 class="vid-headline">The time to build <em>wealth</em><br>through knowledge is now.</h2>
+    <p class="vid-sub">Every day that passes is a day someone else is ahead. Vearnly exists to close that gap.</p>
+  </div>
+</div>
+
 <!-- ABOUT -->
 <section id="about" class="section-wrap" style="background:var(--white)">
   <div class="max-w">
@@ -1261,6 +1368,21 @@ footer {
     </div>
   </div>
 </section>
+
+<!-- VIDEO REEL 2: THE LEARNER -->
+<div class="vid-reel vid-reel-half" id="vid-reel-2">
+  <video
+    src="https://raw.githubusercontent.com/obinna18/Vearnly/main/assets/videos/vearnly-learner.mp4"
+    poster="https://raw.githubusercontent.com/obinna18/Vearnly/main/assets/videos/poster-learner.jpg"
+    muted playsinline loop preload="none"
+    id="v2"
+  ></video>
+  <div class="vid-overlay" id="vid-overlay-2">
+    <span class="vid-eyebrow">&#9670; One Student. One Decision.</span>
+    <h2 class="vid-headline">It started with a <em>question.</em></h2>
+    <p class="vid-sub">Where is the real roadmap for Nigerians building online income?</p>
+  </div>
+</div>
 
 <!-- STORY -->
 <section id="story" class="section-wrap">
@@ -1315,6 +1437,20 @@ footer {
     </div>
   </div>
 </section>
+
+<!-- VIDEO REEL 3: THE PROFESSIONAL -->
+<div class="vid-reel vid-reel-half" id="vid-reel-3">
+  <video
+    src="https://raw.githubusercontent.com/obinna18/Vearnly/main/assets/videos/vearnly-professional.mp4"
+    poster="https://raw.githubusercontent.com/obinna18/Vearnly/main/assets/videos/poster-professional.jpg"
+    muted playsinline loop preload="none"
+    id="v3"
+  ></video>
+  <div class="vid-overlay" id="vid-overlay-3">
+    <span class="vid-eyebrow">&#9670; Real People. Real Results.</span>
+    <h2 class="vid-headline">Knowledge becomes <em>income.</em><br>Income becomes freedom.</h2>
+  </div>
+</div>
 
 <!-- PRODUCTS -->
 <section id="products" class="section-wrap" style="background:var(--white)">
@@ -1394,6 +1530,20 @@ footer {
     </div>
   </div>
 </section>
+
+<!-- VIDEO REEL 4: THE PLATFORM -->
+<div class="vid-reel vid-reel-short" id="vid-reel-4">
+  <video
+    src="https://raw.githubusercontent.com/obinna18/Vearnly/main/assets/videos/vearnly-platform.mp4"
+    poster="https://raw.githubusercontent.com/obinna18/Vearnly/main/assets/videos/poster-platform.jpg"
+    muted playsinline loop preload="none"
+    id="v4"
+  ></video>
+  <div class="vid-overlay" id="vid-overlay-4">
+    <span class="vid-eyebrow">&#9670; Inside Vearnly</span>
+    <h2 class="vid-headline">A platform built for <em>serious</em> learners.</h2>
+  </div>
+</div>
 
 <!-- PREVIEW -->
 <section id="preview" class="section-wrap">
@@ -1486,6 +1636,20 @@ footer {
     <p class="testi-note rv"><strong>Reviews building daily.</strong> Be one of the first 100 and help shape Vearnly's story.</p>
   </div>
 </section>
+
+<!-- VIDEO REEL 5: THE TEXTURE / MOOD -->
+<div class="vid-reel vid-reel-short" id="vid-reel-5">
+  <video
+    src="https://raw.githubusercontent.com/obinna18/Vearnly/main/assets/videos/vearnly-founder.mp4"
+    poster="https://raw.githubusercontent.com/obinna18/Vearnly/main/assets/videos/poster-founder.jpg"
+    muted playsinline loop preload="none"
+    id="v5"
+  ></video>
+  <div class="vid-overlay" id="vid-overlay-5">
+    <span class="vid-eyebrow">&#9670; The Founder</span>
+    <h2 class="vid-headline">Built by someone who <em>searched</em><br>and decided to build it himself.</h2>
+  </div>
+</div>
 
 <!-- CTA BAND -->
 <div class="cta-band rv">
@@ -1769,6 +1933,54 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
   });
 });
+
+/* ==== VIDEO SCROLL TRIGGER ==== */
+(function() {
+  // Map each video element to its overlay
+  const reels = [
+    { vid: document.getElementById('v1'), overlay: document.getElementById('vid-overlay-1') },
+    { vid: document.getElementById('v2'), overlay: document.getElementById('vid-overlay-2') },
+    { vid: document.getElementById('v3'), overlay: document.getElementById('vid-overlay-3') },
+    { vid: document.getElementById('v4'), overlay: document.getElementById('vid-overlay-4') },
+    { vid: document.getElementById('v5'), overlay: document.getElementById('vid-overlay-5') },
+  ];
+
+  const vidObs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const vid = entry.target;
+      const reel = reels.find(r => r.vid === vid);
+      if (!reel) return;
+
+      if (entry.isIntersecting) {
+        // Load src if not already loaded (lazy load)
+        if (vid.getAttribute('data-src') && !vid.src) {
+          vid.src = vid.getAttribute('data-src');
+        }
+        // Play video
+        vid.play().catch(() => {}); // catch autoplay block silently
+        vid.classList.add('vid-playing');
+        // Animate overlay in
+        if (reel.overlay) reel.overlay.classList.add('in');
+      } else {
+        // Pause when out of view to save memory/battery
+        vid.pause();
+        vid.classList.remove('vid-playing');
+        if (reel.overlay) reel.overlay.classList.remove('in');
+      }
+    });
+  }, {
+    threshold: 0.25, // trigger when 25% visible
+    rootMargin: '0px 0px -60px 0px'
+  });
+
+  // Observe all video elements
+  reels.forEach(r => {
+    if (r.vid) {
+      r.vid.muted = true; // ensure muted for autoplay policy
+      vidObs.observe(r.vid);
+    }
+  });
+})();
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
